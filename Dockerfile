@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.0-sdk AS build
+FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -15,7 +15,7 @@ FROM build AS publish
 WORKDIR /app
 RUN dotnet publish -c Release -o out
 
-FROM microsoft/dotnet:2.0-runtime AS runtime
+FROM microsoft/dotnet:2.1-runtime AS runtime
 RUN apt-get update
 RUN apt-get install gnupg wget git unzip -y
 RUN curl -sL https://deb.nodesource.com/setup_8.x |  bash -

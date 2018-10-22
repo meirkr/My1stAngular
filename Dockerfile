@@ -13,7 +13,7 @@ RUN dotnet build
 
 FROM build AS publish
 WORKDIR /app
-RUN dotnet publish -o out
+RUN dotnet publish -c Release -o out
 
 FROM microsoft/dotnet:2.0-runtime AS runtime
 RUN apt-get update

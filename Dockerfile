@@ -1,4 +1,10 @@
 FROM microsoft/dotnet:2.1-sdk AS build
+
+RUN apt-get update
+RUN apt-get install gnupg wget git unzip -y
+RUN curl -sL https://deb.nodesource.com/setup_8.x |  bash -
+RUN apt-get install nodejs -y
+
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -12,10 +18,6 @@ RUN dotnet build
 
 
 FROM build AS publish
-RUN apt-get update
-RUN apt-get install gnupg wget git unzip -y
-RUN curl -sL https://deb.nodesource.com/setup_8.x |  bash -
-RUN apt-get install nodejs -y
 WORKDIR /app
 RUN dotnet publish -c Release -o out
 
